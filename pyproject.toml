@@ -7,7 +7,7 @@ name = "py-plate"
 version = "0"
 description = "Template repo for python projects"
 readme = "README.md"
-license = "LICENSE.md"
+license-files = ["LICENSE.md"]
 keywords = ["python", "template", "example"] 
 classifiers = [
     "Development Status :: 3 - Alpha",
