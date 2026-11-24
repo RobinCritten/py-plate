@@ -1,0 +1,42 @@
+[build-system]
+requires = [ "uv_build>=0.13.9,<0.14"]
+build-backend = "uv_build"
+
+[project]
+name = "py-plate"
+version = "0"
+description = "Template repo for python projects"
+readme = "README.md"
+license = "LICENSE.md"
+keywords = ["python", "template", "example"] 
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Project Templating",
+    "Programming Language :: Python :: 3.13"
+]
+authors = [
+    {name = "Robin Critten", email = "rob.critten@gmail.com"}
+]
+maintainers = [
+    {name = "Robin Critten", email = "rob.critten@gmail.com"}
+]
+requires-python = ">=3.13,<3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest >=9.2, <9.3",
+    "ruff >0.17, <0.18",
+    "mypy >2.4, <2.5",
+    "Sphinx >9.1, <9.2"
+]
+
+[project.scripts]
+py-plate = "py_plate:main_cli"
+
+[project.urls]
+Repository = "https://github.com/RobinCritten/py-plate"
+Documentation = "https://github.com/RobinCritten/py-plate/tree/main/docs"
+Issues = "https://github.com/RobinCritten/py-plate/issues"
+Changelog = "https://github.com/RobinCritten/py-plate/main/CHANGELOG.md"

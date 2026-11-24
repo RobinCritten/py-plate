@@ -1,0 +1,1 @@
+This is a template repo and does not contain any code that is intended to be licensed. This document is a placeholder for use of a proper license when creating a project from this repo.
