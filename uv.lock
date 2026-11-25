@@ -369,6 +369,7 @@ dev = [
     { name = "mypy" },
     { name = "pre-commit" },
     { name = "pytest" },
+    { name = "pytest-mock" },
     { name = "ruff" },
     { name = "sphinx" },
 ]
@@ -380,6 +381,7 @@ dev = [
     { name = "mypy", specifier = ">2.4,<2.5" },
     { name = "pre-commit", specifier = ">4.6,<4.7" },
     { name = "pytest", specifier = ">=9.2,<9.3" },
+    { name = "pytest-mock", specifier = ">3.16,<3.17" },
     { name = "ruff", specifier = ">0.17,<0.18" },
     { name = "sphinx", specifier = ">9.1,<9.2" },
 ]
@@ -407,6 +409,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/79/42/bb4641652e58dedeac2ec51abc1f8cae4fee4ec63899a0999016229a0f2a/pytest-9.2.0.tar.gz", hash = "sha256:97c4f3b1f3c7414aa36465e09b8220f1d03627993bd51b1282e193753c80557b", size = 1797555, upload-time = "2026-10-27T21:30:20.728Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/51/39/1f5d8c8877a0fa327db959c19341d4be61660de1ab6b7391f9eb805bcd67/pytest-9.2.0-py3-none-any.whl", hash = "sha256:07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588", size = 411776, upload-time = "2026-10-27T21:30:19.131Z" },
+]
+
+[[package]]
+name = "pytest-mock"
+version = "3.16.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pytest" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/99/f6/e40a0a0abd8d6769531f63654a81529a98f1342a547173d4231a021ecfde/pytest_mock-3.16.1.tar.gz", hash = "sha256:c6bf5fd123e9635471c63c46ee23044076b4a9f5fca2e39b11e468917c1199ec", size = 41135, upload-time = "2026-10-17T15:21:22.271Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e2/69/5941ea3bbd1bb48007767f6ef685c1996b016a4470328c26967aa69e4982/pytest_mock-3.16.1-py3-none-any.whl", hash = "sha256:cd162ca2495584a1fd854b4f80cfe520399a7654a462a42a84cd268844a9122b", size = 11110, upload-time = "2026-10-17T15:21:20.817Z" },
 ]
 
 [[package]]
