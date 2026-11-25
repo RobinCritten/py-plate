@@ -10,11 +10,10 @@ class Cows_And_Bulls:
     number_of_guesses: int = 0
     current_guess: str
 
-    def __init__(self, goal_length: int = 5, guesses_upper_limit: int | None = None):
+    def __init__(self, goal_length: int = 5):
         self.goal_length = goal_length
-        self.guesses_upper_limit = guesses_upper_limit
         self.generate_goal()
-        self.goal_map: Counter[str] = Counter(self.goal)
+        self.goal_map: Counter = Counter(self.goal)
 
     def generate_goal(self) -> None:
 
@@ -42,6 +41,7 @@ class Cows_And_Bulls:
             return False
 
         # return true if checks pass
+        self.number_of_guesses += 1
         return True
 
     def check_guess(self) -> bool:
@@ -67,7 +67,7 @@ class Cows_And_Bulls:
     def cow_counter(self, bulls: int) -> int:
         cow_counter = 0
 
-        current_guess_map: Counter[str] = Counter(self.current_guess)
+        current_guess_map: Counter = Counter(self.current_guess)
 
         for char in self.current_guess:
             current_guess_map[f"{char}"] += 1
@@ -92,7 +92,6 @@ class Cows_And_Bulls:
             f"Enter your guess, it must be a number {self.goal_length} digits long: "
         )
         self.current_guess = guess
-        self.number_of_guesses += 1
 
     def rules(self) -> None:
         # print the game rules
