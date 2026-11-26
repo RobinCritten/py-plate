@@ -4,7 +4,7 @@ from typing import Any
 import pytest
 from pytest_mock import MockerFixture
 
-from py_plate.cows_and_bulls.core import Cows_And_Bulls
+from py_plate.cows_and_bulls.core import Cows_And_Bulls, run_game
 
 
 @pytest.fixture
@@ -198,3 +198,12 @@ def test_rules(game: Cows_And_Bulls, mocker: MockerFixture) -> None:
     game.rules()
 
     mock_print.assert_called_once()
+
+
+def test_run_game(mocker: MockerFixture) -> None:
+    mock_game = mocker.patch("py_plate.cows_and_bulls.core.Cows_And_Bulls")
+
+    run_game()
+
+    mock_game.assert_called_once()
+    mock_game.assert_called_once_with(5)

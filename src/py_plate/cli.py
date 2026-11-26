@@ -1,4 +1,4 @@
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Namespace
 
 from py_plate.cows_and_bulls.core import run_game
 
@@ -23,6 +23,6 @@ def setup_argparse() -> ArgumentParser:
 
 def main() -> None:
     """Entry point for project CLI, reads args and runs the project"""
-    parser = setup_argparse()
-    args = parser.parse_args()
+    parser: ArgumentParser = setup_argparse()
+    args: Namespace = parser.parse_args()
     run_game(args.length)
