@@ -13,7 +13,7 @@ class Cows_And_Bulls:
     def __init__(self, goal_length: int = 5):
         self.goal_length = goal_length
         self.generate_goal()
-        self.goal_map: Counter = Counter(self.goal)
+        self.goal_map = Counter(self.goal)
 
     def generate_goal(self) -> None:
 
@@ -67,7 +67,7 @@ class Cows_And_Bulls:
     def cow_counter(self, bulls: int) -> int:
         cow_counter = 0
 
-        current_guess_map: Counter = Counter(self.current_guess)
+        current_guess_map: Counter[str] = Counter(self.current_guess)
 
         for char in self.current_guess:
             current_guess_map[f"{char}"] += 1
@@ -121,7 +121,7 @@ class Cows_And_Bulls:
             return
 
 
-def main():
+def main() -> None:
     game = Cows_And_Bulls()
     print(game.goal)
     game.play()

@@ -1,12 +1,14 @@
 from collections import Counter
+from typing import Any
 
 import pytest
+from pytest_mock import MockerFixture
 
 from py_plate.cows_and_bulls.core import Cows_And_Bulls
 
 
 @pytest.fixture
-def game():
+def game() -> Cows_And_Bulls:
     return Cows_And_Bulls()
 
 
@@ -26,7 +28,7 @@ def test_class_creation(game: Cows_And_Bulls) -> None:
     assert sum(game.goal_map.values()) == game.goal_length
 
 
-def test_make_guess(game, mocker) -> None:
+def test_make_guess(game: Cows_And_Bulls, mocker: MockerFixture) -> None:
     mock_input = mocker.patch(
         "py_plate.cows_and_bulls.core.input", return_value="01234"
     )
@@ -37,7 +39,7 @@ def test_make_guess(game, mocker) -> None:
     mock_input.assert_called_once()
 
 
-def test_generate_goal(game, mocker):
+def test_generate_goal(game: Cows_And_Bulls, mocker: MockerFixture) -> None:
 
     mock_randint = mocker.patch("py_plate.cows_and_bulls.core.randint", return_value=0)
 
@@ -49,7 +51,7 @@ def test_generate_goal(game, mocker):
 
 
 @pytest.mark.parametrize("guesses", ["01234", "00000", "99999"])
-def test_validate_guess_valid_guesses(game, guesses):
+def test_validate_guess_valid_guesses(game: Cows_And_Bulls, guesses: str) -> None:
     game.current_guess = guesses
 
     result: bool = game.validate_guess()
@@ -62,12 +64,14 @@ def test_validate_guess_valid_guesses(game, guesses):
     "guesses",
     ["1", "123", "123456", "1234567890", "a", "abc", "abcdef", "1a", "12345a"],
 )
-def test_validate_guess_incorrect_guess_length(game, mocker, guesses):
+def test_validate_guess_incorrect_guess_length(
+    game: Cows_And_Bulls, mocker: Any, guesses: str
+) -> None:
     game.current_guess = guesses
 
     mock_print = mocker.patch("py_plate.cows_and_bulls.core.print")
 
-    result = game.validate_guess()
+    result: bool = game.validate_guess()
 
     assert not result
     assert game.number_of_guesses == 0
@@ -79,12 +83,14 @@ def test_validate_guess_incorrect_guess_length(game, mocker, guesses):
 @pytest.mark.parametrize(
     "guesses", ["abcde", "aaaaa", "!£$%^", "1234a", "a1234", "12a45"]
 )
-def test_validate_guess_incorrect_value(game, mocker, guesses):
+def test_validate_guess_incorrect_value(
+    game: Cows_And_Bulls, mocker: MockerFixture, guesses: str
+) -> None:
     game.current_guess = guesses
 
     mock_print = mocker.patch("py_plate.cows_and_bulls.core.print")
 
-    result = game.validate_guess()
+    result: bool = game.validate_guess()
 
     assert not result
     assert game.number_of_guesses == 0
@@ -93,21 +99,23 @@ def test_validate_guess_incorrect_value(game, mocker, guesses):
     )
 
 
-def test_check_guess_correct_guess(game):
+def test_check_guess_correct_guess(game: Cows_And_Bulls) -> None:
     game.goal = "00000"
     game.current_guess = "00000"
-    result = game.check_guess()
+    result: bool = game.check_guess()
 
     assert result
 
 
-def test_check_guess_incorrect_guess(game, mocker):
+def test_check_guess_incorrect_guess(
+    game: Cows_And_Bulls, mocker: MockerFixture
+) -> None:
     mock_bulls = mocker.patch.object(game, "bull_counter", return_value=1)
     mock_cows = mocker.patch.object(game, "cow_counter", return_value=2)
     mock_print = mocker.patch("py_plate.cows_and_bulls.core.print")
 
     game.current_guess = "00000"
-    result = game.check_guess()
+    result: bool = game.check_guess()
 
     assert not result
     mock_bulls.assert_called_once()
@@ -130,10 +138,12 @@ def test_check_guess_incorrect_guess(game, mocker):
         ("00000", "11111", 0),
     ],
 )
-def test_bull_counter(game, guess, goal, expected):
+def test_bull_counter(
+    game: Cows_And_Bulls, guess: str, goal: str, expected: int
+) -> None:
     game.current_guess = guess
     game.goal = goal
-    result = game.bull_counter()
+    result: int = game.bull_counter()
 
     assert result == expected
 
@@ -147,16 +157,18 @@ def test_bull_counter(game, guess, goal, expected):
         ("12345", "11112", 1, 1),
     ],
 )
-def test_cow_counter(game, goal, guess, expected, bulls):
+def test_cow_counter(
+    game: Cows_And_Bulls, goal: str, guess: str, expected: int, bulls: int
+) -> None:
     game.current_guess = guess
     game.goal_map = Counter(goal)
     game.goal = goal
-    result = game.cow_counter(bulls)
+    result: int = game.cow_counter(bulls)
 
     assert result == expected
 
 
-def test_play_retries_until_won(game, mocker):
+def test_play_retries_until_won(game: Cows_And_Bulls, mocker: MockerFixture) -> None:
     mocker.patch.object(game, "rules")
     mock_make_guess = mocker.patch.object(game, "make_guess")
     mock_validate_guess = mocker.patch.object(
@@ -180,7 +192,7 @@ def test_play_retries_until_won(game, mocker):
     )
 
 
-def test_rules(game, mocker):
+def test_rules(game: Cows_And_Bulls, mocker: MockerFixture) -> None:
     mock_print = mocker.patch("py_plate.cows_and_bulls.core.print")
 
     game.rules()
