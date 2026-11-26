@@ -94,10 +94,18 @@ class Cows_And_Bulls:
         self.current_guess = guess
 
     def rules(self) -> None:
-        # print the game rules
-        pass
+        print(f"""
+        -- Welcome to cows and bulls, heres how to play! -- \n
+            1. Your goal is to guess the randomly generated number \n
+            2. You have an infinite number of guesses to do so, but try to get the least possible \n
+            3. For this game the number generated is {self.goal_length} digits long, and can have multiple of the same digit \n
+            4. After a guess you will be given a number of cows; the correct digits in the wrong place, and bulls; correct guesses in the correct place. 
+               A bull cannot also be a cow 
+        """)
 
     def play(self) -> None:
+
+        self.rules()
 
         while True:
             self.make_guess()
@@ -107,8 +115,9 @@ class Cows_And_Bulls:
             if not self.check_guess():
                 continue
 
-            print("Congrats, you win!")
-            print(f"You guessed the correct answer in {self.number_of_guesses} guesses")
+            print(
+                f"Congrats, you win! \n You guessed the correct answer in {self.number_of_guesses} guesses"
+            )
             return
 
 
