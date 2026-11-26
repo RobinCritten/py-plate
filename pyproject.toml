@@ -35,7 +35,7 @@ dev = [
 ]
 
 [project.scripts]
-py-plate = "py_plate:main_cli"
+py-plate = "py_plate.cli:main"
 
 [project.urls]
 Repository = "https://github.com/RobinCritten/py-plate"

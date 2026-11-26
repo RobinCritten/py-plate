@@ -1,4 +1,7 @@
-from py_plate.cows_and_bulls.core import main
+import sys
 
 if __name__ == "__main__":
-    main()
+    from py_plate.cows_and_bulls.core import run_game
+
+    run_game()
+    sys.exit()

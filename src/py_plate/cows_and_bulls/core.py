@@ -10,11 +10,11 @@ class Cows_And_Bulls:
     number_of_guesses: int = 0
     current_guess: str
 
-    def __init__(self, goal_length: int = 5):
+    def __init__(self, goal_length: int):
         """Initialization function for Cows_And_Bulls class
 
         Args:
-            goal_length (int, optional): Sets the length of the goal to be guessed. Defaults to 5.
+            goal_length (int, optional): Sets the length of the goal to be guessed.
         """
         self.goal_length = goal_length
         self.generate_goal()
@@ -151,8 +151,12 @@ class Cows_And_Bulls:
             return
 
 
-def main() -> None:
-    """Initialise and run game `Cows_And_Bulls`"""
-    game = Cows_And_Bulls()
+def run_game(goal_length: int = 5) -> None:
+    """Initialise and run game `Cows_And_Bulls`
+
+    Args:
+        goal_length (int): Sets the length of the goal to be guessed in the game
+    """
+    game = Cows_And_Bulls(goal_length)
     # print(game.goal) # uncomment for dev use
     game.play()

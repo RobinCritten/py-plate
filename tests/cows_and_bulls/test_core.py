@@ -9,7 +9,7 @@ from py_plate.cows_and_bulls.core import Cows_And_Bulls
 
 @pytest.fixture
 def game() -> Cows_And_Bulls:
-    return Cows_And_Bulls()
+    return Cows_And_Bulls(5)
 
 
 def test_class_creation(game: Cows_And_Bulls) -> None:
