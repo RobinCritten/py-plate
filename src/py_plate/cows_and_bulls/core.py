@@ -11,11 +11,17 @@ class Cows_And_Bulls:
     current_guess: str
 
     def __init__(self, goal_length: int = 5):
+        """Initialization function for Cows_And_Bulls class
+
+        Args:
+            goal_length (int, optional): Sets the length of the goal to be guessed. Defaults to 5.
+        """
         self.goal_length = goal_length
         self.generate_goal()
         self.goal_map = Counter(self.goal)
 
     def generate_goal(self) -> None:
+        """generates the goal of the game to be guessed and stores the result to `self.goal`"""
 
         digit_collection: str = ""
 
@@ -25,27 +31,34 @@ class Cows_And_Bulls:
         self.goal = digit_collection
 
     def validate_guess(self) -> bool:
+        """Validates if `self.current_guess` is a valid input containing only numerical digits and is the correct length
 
-        # check is correct length
+        Returns:
+            bool: status of validation
+        """
+
         if len(self.current_guess) != self.goal_length:
             print(
                 f"Your guess was {len(self.current_guess)} digits long, please make sure your guess is the correct length ({self.goal_length})"
             )
             return False
 
-        # check is number
         try:
             int(self.current_guess)
         except ValueError:
             print("Your guess contained non numeric values, please only use digits 0-9")
             return False
 
-        # return true if checks pass
         self.number_of_guesses += 1
         return True
 
     def check_guess(self) -> bool:
-        # check guess against goal, return true is matched
+        """Checks `self.current_guess` against `self.goal` to calculate the number of cows and bulls. Returns the result to the player.
+
+        Returns:
+            bool: Status of the check. Only returns True if `self.goal` exactly matches `self.goal`
+        """
+
         if self.current_guess == self.goal:
             return True
 
@@ -57,6 +70,12 @@ class Cows_And_Bulls:
         return False
 
     def bull_counter(self) -> int:
+        """Calculate the number of bulls between `self.goal` and `self.current_guess`
+
+        Returns:
+            int: Number of Bulls in `self.current_guess`
+        """
+
         bull_counter = 0
         for counter in range(self.goal_length):
             if self.current_guess[counter] == self.goal[counter]:
@@ -65,6 +84,15 @@ class Cows_And_Bulls:
         return bull_counter
 
     def cow_counter(self, bulls: int) -> int:
+        """Calculate the number of cows between `self.goal` and `self.current_guess`
+
+        Args:
+            bulls (int): The number of bulls previously calculated
+
+        Returns:
+            int: The number of cows in `self.current_guess`
+        """
+
         cow_counter = 0
 
         current_guess_map: Counter[str] = Counter(self.current_guess)
@@ -87,13 +115,14 @@ class Cows_And_Bulls:
         return cow_counter
 
     def make_guess(self) -> None:
-        # retrieve user input
+        """User input that overwrites `self.current_guess`"""
         guess = input(
             f"Enter your guess, it must be a number {self.goal_length} digits long: "
         )
         self.current_guess = guess
 
     def rules(self) -> None:
+        """Print the rules to the console"""
         print(f"""
         -- Welcome to cows and bulls, heres how to play! -- \n
             1. Your goal is to guess the randomly generated number \n
@@ -104,6 +133,7 @@ class Cows_And_Bulls:
         """)
 
     def play(self) -> None:
+        """Coordinator function for `Cows_And_Bulls`. On function call beings game logic and returns on game completion"""
 
         self.rules()
 
@@ -122,9 +152,7 @@ class Cows_And_Bulls:
 
 
 def main() -> None:
+    """Initialise and run game `Cows_And_Bulls`"""
     game = Cows_And_Bulls()
-    print(game.goal)
+    # print(game.goal) # uncomment for dev use
     game.play()
-
-
-# may be worth making the game a class with attributes digits, n.o. guesses etc?
