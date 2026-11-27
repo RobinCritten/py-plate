@@ -1,5 +1,5 @@
 name: Pre-Commit
-run-name: Run Pre-Commit checks on ${{ github.ref }} by ${{ github.actor }}
+run-name: Run Pre-Commit checks on ${{ github.ref_name }} by ${{ github.actor }}
 
 on:
     workflow_dispatch:
