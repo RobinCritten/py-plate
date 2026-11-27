@@ -1,0 +1,43 @@
+name: Pre-Commit
+run-name: Run Pre-Commit checks on ${{ github.base_ref }} by ${{ github.actor }}
+
+on:
+    push:
+        branches:
+            - main
+            - dev
+            - develop
+            - 'release/*'
+            - 'releases/*'
+
+jobs:
+    pre-commit-checks:
+        name: Pre-Commit Checks
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v7
+            
+            - name: Setup UV
+              uses: astral-sh/setup-uv@9
+              with:
+                version: "0.13.9"
+
+            - name: Install the Project
+              run: uv sync --locked --all-extras --dev
+
+            - name: Ruff Check
+              run: uv run ruff check
+
+            - name: Ruff Format
+              run: uv run ruff format
+
+            - name: Run mypy
+              run: uv run mypy --strict .
+
+            - name: Run Tests
+              run: uv run pytest -v
+            
+            - name: Build Project
+              run: uv run build
+            
