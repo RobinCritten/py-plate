@@ -40,5 +40,5 @@ jobs:
               run: uv run pytest -v
             
             - name: Build Project
-              run: uv run build
+              run: uv build
  
