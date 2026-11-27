@@ -3,6 +3,13 @@ run-name: Run Pre-Commit checks on ${{ github.base_ref }} by ${{ github.actor }}
 
 on:
     workflow_dispatch:
+    pull_request:
+        branches:
+            - main
+            - dev
+            - develop
+            - 'release/*'
+            - 'releases/*'
 
 jobs:
     pre-commit-checks:
@@ -34,4 +41,4 @@ jobs:
             
             - name: Build Project
               run: uv run build
-     
+ 
