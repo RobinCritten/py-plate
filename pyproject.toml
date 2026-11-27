@@ -28,6 +28,7 @@ dependencies = []
 dev = [
     "pytest >=9.2, <9.3",
     "pytest-mock >3.16, <3.17",
+    "pytest-cov ==7.1",
     "ruff >0.17, <0.18",
     "mypy >2.4, <2.5",
     "Sphinx >9.1, <9.2",
@@ -42,3 +43,14 @@ Repository = "https://github.com/RobinCritten/py-plate"
 Documentation = "https://github.com/RobinCritten/py-plate/tree/main/docs"
 Issues = "https://github.com/RobinCritten/py-plate/issues"
 Changelog = "https://github.com/RobinCritten/py-plate/main/CHANGELOG.md"
+
+[tool.pytest.ini_options]
+addopts = """
+    --cov=py_plate
+    --cov-branch
+    --cov-report=term-missing
+    --cov-fail-under 80
+    --cov-report=markdown:reports/coverage.md
+    --cov-report=html:reports/htmlcov
+    --cov-report=xml:reports/coverage.xml
+"""

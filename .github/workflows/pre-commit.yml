@@ -29,17 +29,44 @@ jobs:
               run: uv sync --locked --all-extras --dev
 
             - name: Ruff Check
+              if: always()
               run: uv run ruff check --output-format=github
 
             - name: Ruff Format
+              if: always()
               run: uv run ruff format --output-format=github
 
             - name: Run mypy
+              if: always()
               run: uv run mypy --strict .
 
             - name: Run Tests
+              if: always()
               run: uv run pytest -v
+
+            - name: Upload Test Coverage Report
+              if: always()
+              uses: actions/upload-artifact@v7
+              with:
+                name: pytest-report-${{ github.base_ref }}-${{ github.action.id }}
+                path: reports/
+                if-no-files-found: error
+                retention-days: 30
             
+            - name: Add Test Coverage to Job Summary
+              if: always()
+              run: |
+                if [ -f reports/coverage.md ]; then
+                  {
+                    echo "## Test Coverage"
+                    echo
+                    cat reports/coverage.md
+                  } >> "$GITHUB_STEP_SUMMARY"
+                else
+                  echo "No coverage report found." >> "$GITHUB_STEP_SUMMARY"
+                fi
+
             - name: Build Project
+              if: always()
               run: uv build
  
