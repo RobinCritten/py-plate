@@ -2,13 +2,7 @@ name: Pre-Commit
 run-name: Run Pre-Commit checks on ${{ github.base_ref }} by ${{ github.actor }}
 
 on:
-    push:
-        branches:
-            - main
-            - dev
-            - develop
-            - 'release/*'
-            - 'releases/*'
+    workflow_dispatch:
 
 jobs:
     pre-commit-checks:
@@ -19,7 +13,7 @@ jobs:
               uses: actions/checkout@v7
             
             - name: Setup UV
-              uses: astral-sh/setup-uv@9
+              uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d
               with:
                 version: "0.13.9"
 
@@ -40,4 +34,4 @@ jobs:
             
             - name: Build Project
               run: uv run build
-            
+     
